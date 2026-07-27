@@ -1,6 +1,7 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { BookSpine, Footer, Header } from "../components/SiteChrome";
-import { packingGroups } from "../data";
+import { assetPath, packingGroups } from "../data";
 
 const bookingSteps = [
   ["出票后", "锁定上海—大理、丽江—上海航班，以及大理—丽江动车候选班次。"],
@@ -27,7 +28,10 @@ export default function NotesPage() {
       <main className="paper">
         <Header compact />
         <article className="notes-page">
-          <header className="notes-cover">
+          <header
+            className="notes-cover"
+            style={{ "--notes-cover-image": `url("${assetPath("/images/jade-dragon.jpg")}")` } as CSSProperties}
+          >
             <div>
               <Link href="/" className="back-link">← 返回旅行手账</Link>
               <span className="eyebrow">BEFORE YOU GO · 2026.09</span>
@@ -135,4 +139,3 @@ export default function NotesPage() {
     </div>
   );
 }
-

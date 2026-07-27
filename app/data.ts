@@ -1,5 +1,11 @@
 export type City = "大理" | "丽江";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+export function assetPath(path: string) {
+  return `${publicBasePath}${path}`;
+}
+
 export type ScheduleItem = {
   time: string;
   place: string;
@@ -505,4 +511,3 @@ export const costRows = [
   ["餐饮", "¥2,680", "¥3,660", "一家三口九天"],
   ["合计", "¥24,080", "¥35,860", "舒适建议准备 ¥28,000—32,000"],
 ];
-

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { attractions, costRows, days, tripMeta, type City } from "../data";
+import { assetPath, attractions, costRows, days, tripMeta, type City } from "../data";
 
 type Filter = "全部" | City;
 
@@ -78,7 +78,7 @@ export function TripPlanner() {
         <div className="hero__visual">
           <figure className="hero__photo hero__photo--main">
             <Image
-              src="/images/dali-erhai.jpg"
+              src={assetPath("/images/dali-erhai.jpg")}
               alt="洱海与苍山之间的乡野风景"
               fill
               priority
@@ -88,7 +88,7 @@ export function TripPlanner() {
           </figure>
           <figure className="hero__photo hero__photo--inset">
             <Image
-              src="/images/jade-dragon.jpg"
+              src={assetPath("/images/jade-dragon.jpg")}
               alt="丽江玉龙雪山"
               fill
               priority
@@ -196,7 +196,7 @@ export function TripPlanner() {
                 {isOpen && (
                   <div className="day-card__body">
                     <div className="day-photo">
-                      <Image src={day.hero} alt="" fill sizes="(max-width: 800px) 100vw, 30vw" />
+                      <Image src={assetPath(day.hero)} alt="" fill sizes="(max-width: 800px) 100vw, 30vw" />
                       <span>{day.weather}</span>
                     </div>
                     <div className="timeline">
@@ -253,7 +253,7 @@ export function TripPlanner() {
           {attractions.slice(0, 8).map((place, index) => (
             <Link className={`place-card place-card--${index % 3}`} href={`/attraction/${place.id}`} key={place.id}>
               <div className="place-card__image">
-                <Image src={place.image} alt={place.name} fill sizes="(max-width: 800px) 90vw, 30vw" />
+                <Image src={assetPath(place.image)} alt={place.name} fill sizes="(max-width: 800px) 90vw, 30vw" />
               </div>
               <div className="place-card__copy">
                 <span>{place.city} · {place.duration}</span>
@@ -327,4 +327,3 @@ export function TripPlanner() {
     </>
   );
 }
-

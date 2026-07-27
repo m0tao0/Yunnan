@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const canonicalOrigin = publicBasePath
+  ? "https://m0tao0.github.io"
+  : "https://yunnan-family-journey.m-taotao.chatgpt.site";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(canonicalOrigin),
   title: {
     default: "山水之间｜云南亲子旅行计划",
     template: "%s｜山水之间",
@@ -19,7 +25,7 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     images: [
       {
-        url: "/images/yunnan-social-cover.png",
+        url: `${publicBasePath}/images/yunnan-social-cover.png`,
         width: 1680,
         height: 945,
         alt: "大理与丽江九日亲子旅行",

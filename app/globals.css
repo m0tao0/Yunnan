@@ -1281,7 +1281,7 @@ img {
   align-items: center;
   background:
     linear-gradient(90deg, rgba(242,234,220,.98) 0 58%, rgba(242,234,220,.63)),
-    url("/images/jade-dragon.jpg") center / cover;
+    var(--notes-cover-image) center / cover;
 }
 
 .notes-cover h1 {
@@ -1786,7 +1786,7 @@ img {
     grid-template-columns: 1fr;
     background:
       linear-gradient(rgba(242,234,220,.92), rgba(242,234,220,.92)),
-      url("/images/jade-dragon.jpg") center / cover;
+      var(--notes-cover-image) center / cover;
   }
 
   .packing-grid {
@@ -1821,4 +1821,3 @@ img {
     grid-template-columns: 1fr 1fr;
   }
 }
-

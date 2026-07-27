@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookSpine, Footer, Header } from "../../components/SiteChrome";
-import { attractionById, attractions } from "../../data";
+import { assetPath, attractionById, attractions } from "../../data";
 
 export function generateStaticParams() {
   return attractions.map((attraction) => ({ id: attraction.id }));
@@ -31,7 +31,7 @@ export default async function AttractionPage({
           <section className="detail-hero">
             <div className="detail-hero__image">
               <Image
-                src={attraction.image}
+                src={assetPath(attraction.image)}
                 alt={attraction.name}
                 fill
                 priority
@@ -107,4 +107,3 @@ export default async function AttractionPage({
     </div>
   );
 }
-
