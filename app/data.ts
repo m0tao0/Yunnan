@@ -47,6 +47,11 @@ export type Attraction = {
   rainPlan: string;
 };
 
+export type ActivityImage = {
+  image: string;
+  source?: string;
+};
+
 export const tripMeta = {
   dates: "2026.09.04—09.12",
   route: "上海 → 大理 → 丽江 → 上海",
@@ -526,27 +531,226 @@ export function stationHref(
     : `/stop/${dayNumber}/${index}`;
 }
 
-export function activityImagesFor(attraction: Attraction) {
-  const pools: Record<City, string[]> = {
-    大理: [
-      "/images/dali-erhai.jpg",
-      "/images/dali-old-town.jpg",
-      "/images/dali-erhai.jpg",
-    ],
-    丽江: [
-      "/images/lijiang-old-town.jpg",
-      "/images/jade-dragon.jpg",
-      "/images/black-dragon-pool.jpg",
-      "/images/snow-summit.jpg",
-    ],
-  };
+const commons = (filename: string) =>
+  `https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(filename)}`;
 
-  const candidates = [
-    attraction.image,
-    ...pools[attraction.city].filter((image) => image !== attraction.image),
-  ];
+const activityImages: Record<string, ActivityImage[]> = {
+  "march-street": [
+    {
+      image: "/images/activity/fruit-market.jpg",
+      source: commons("Bingtsai Fruit Market - panoramio.jpg"),
+    },
+    {
+      image: "/images/activity/tiedye.jpg",
+      source: commons(
+        "Bai fabric, tie-dyed - Yunnan Provincial Museum - DSC02211.JPG",
+      ),
+    },
+    {
+      image: "/images/activity/dali-vendor.jpg",
+      source: commons("Flute Vendor (48427572497).jpg"),
+    },
+  ],
+  "cloud-grassland": [
+    {
+      image: "/images/activity/playground-climb.jpg",
+      source: commons(
+        "Childrens playground climbing structure built to resemble rocks.jpg",
+      ),
+    },
+    {
+      image: "/images/activity/playground-slide.jpg",
+      source: commons("Chinese Playground (dragon structure).jpg"),
+    },
+    {
+      image: "/images/activity/feeding-pets.jpg",
+      source: commons(
+        "Child Feeding her Pets (1872) painting by Gaetano Chierici.jpg",
+      ),
+    },
+  ],
+  "dali-old-town": [
+    {
+      image: "/images/dali-old-town.jpg",
+      source: commons("The old town of Dali.JPG"),
+    },
+    {
+      image: "/images/dali-old-town.jpg",
+      source: commons("The old town of Dali.JPG"),
+    },
+    {
+      image: "/images/activity/chinese-food-vendors.jpg",
+      source: commons("Chinese Food Vendors (48599394157).jpg"),
+    },
+  ],
+  xizhou: [
+    {
+      image: "/images/activity/xizhou-market.jpg",
+      source: commons("Market Scene, Xizhou, China (49528691361).jpg"),
+    },
+    {
+      image: "/images/activity/tiedye.jpg",
+      source: commons(
+        "Bai fabric, tie-dyed - Yunnan Provincial Museum - DSC02211.JPG",
+      ),
+    },
+    {
+      image: "/images/activity/chinese-food-vendors.jpg",
+      source: commons("Chinese Food Vendors (48599394157).jpg"),
+    },
+  ],
+  "succulent-garden": [
+    {
+      image: "/images/activity/playground-slide.jpg",
+      source: commons("Chinese Playground (dragon structure).jpg"),
+    },
+    {
+      image: "/images/activity/succulent.jpg",
+      source: commons("SLO Botanical Garden - Succulent 1.jpg"),
+    },
+    {
+      image: "/images/activity/feeding-pets.jpg",
+      source: commons(
+        "Child Feeding her Pets (1872) painting by Gaetano Chierici.jpg",
+      ),
+    },
+  ],
+  "dali-luge": [
+    {
+      image: "/images/activity/luge-cart.jpg",
+      source: commons(
+        "Laterns-Kuehboden-summer toboggan-run (type Wiegand)-01ASD.jpg",
+      ),
+    },
+    {
+      image: "/images/activity/luge-ride.jpg",
+      source: commons(
+        "Laterns-Kuehboden-summer toboggan-run (type Wiegand)-02ASD.jpg",
+      ),
+    },
+    {
+      image: "/images/activity/hotel-pool.jpg",
+      source: commons("Swimming Pool in a hotel in Tamil Nadu 03.jpg"),
+    },
+  ],
+  "erhai-corridor": [
+    {
+      image: "/images/activity/family-cycling.jpg",
+      source: commons(
+        "Paul Bunyan Scenic Byway - Family Bicycling Along Paul Bunyan Scenic Byway - NARA - 7720972.jpg",
+      ),
+    },
+    {
+      image: "/images/dali-erhai.jpg",
+      source:
+        "https://english.news.cn/20241101/7df0d5fb80414aec8a5865ccd7962731/c.html",
+    },
+    {
+      image: "/images/dali-erhai.jpg",
+      source:
+        "https://english.news.cn/20241101/7df0d5fb80414aec8a5865ccd7962731/c.html",
+    },
+  ],
+  "hutuwu-baisha": [
+    {
+      image: "/images/snow-summit.jpg",
+      source: commons("Lijiang Snow Mountain Summit.JPG"),
+    },
+    {
+      image: "/images/activity/dongba-glyphs.jpg",
+      source: commons("Dongba pictographic glyphs - Lijiang.jpg"),
+    },
+    {
+      image: "/images/activity/dongba-glyphs.jpg",
+      source: commons("Dongba pictographic glyphs - Lijiang.jpg"),
+    },
+  ],
+  "jade-dragon": [
+    {
+      image: "/images/activity/forest-boardwalk.jpg",
+      source: commons("Maoershan-Boarded Trail.jpg"),
+    },
+    {
+      image: "/images/jade-dragon.jpg",
+      source: commons(
+        "Lijiang Yunnan China Jade-Dragon-Snow-Mountain-01.jpg",
+      ),
+    },
+    {
+      image: "/images/activity/blue-moon-valley.jpg",
+      source: commons(
+        "玉龙雪山 蓝月谷 Blue Moon Valley - panoramio.jpg",
+      ),
+    },
+  ],
+  shuhe: [
+    {
+      image: "/images/lijiang-old-town.jpg",
+      source: commons("Lijiang-calle-l01.jpg"),
+    },
+    {
+      image: "/images/black-dragon-pool.jpg",
+      source: commons("Black Dragon Pool, Lijiang - panoramio.jpg"),
+    },
+    {
+      image: "/images/activity/chinese-food-vendors.jpg",
+      source: commons("Chinese Food Vendors (48599394157).jpg"),
+    },
+  ],
+  "yuhu-longnv": [
+    {
+      image: "/images/activity/stone-village-1.jpg",
+      source: commons("Baoshan Stone Village.jpg"),
+    },
+    {
+      image: "/images/activity/blue-moon-valley.jpg",
+      source: commons(
+        "玉龙雪山 蓝月谷 Blue Moon Valley - panoramio.jpg",
+      ),
+    },
+    {
+      image: "/images/jade-dragon.jpg",
+      source: commons(
+        "Lijiang Yunnan China Jade-Dragon-Snow-Mountain-01.jpg",
+      ),
+    },
+  ],
+  "black-dragon-old-town": [
+    {
+      image: "/images/black-dragon-pool.jpg",
+      source: commons("Black Dragon Pool, Lijiang - panoramio.jpg"),
+    },
+    {
+      image: "/images/activity/dongba-glyphs.jpg",
+      source: commons("Dongba pictographic glyphs - Lijiang.jpg"),
+    },
+    {
+      image: "/images/lijiang-old-town.jpg",
+      source: commons("Lijiang-calle-l01.jpg"),
+    },
+  ],
+  "zhongyi-market": [
+    {
+      image: "/images/activity/chinese-food-vendors.jpg",
+      source: commons("Chinese Food Vendors (48599394157).jpg"),
+    },
+    {
+      image: "/images/activity/fruit-market.jpg",
+      source: commons("Bingtsai Fruit Market - panoramio.jpg"),
+    },
+    {
+      image: "/images/activity/xizhou-market.jpg",
+      source: commons("Market Scene, Xizhou, China (49528691361).jpg"),
+    },
+  ],
+};
 
-  return attraction.activities.map(
-    (_, index) => candidates[index % candidates.length],
-  );
+export function activityImagesFor(attraction: Attraction): ActivityImage[] {
+  const images = activityImages[attraction.id];
+
+  if (!images || images.length !== attraction.activities.length) {
+    return attraction.activities.map(() => ({ image: attraction.image }));
+  }
+
+  return images;
 }

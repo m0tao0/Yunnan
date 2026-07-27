@@ -2046,6 +2046,25 @@ img {
   letter-spacing: .12em;
 }
 
+.play-gallery__source {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 2;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(24, 22, 18, 0.68);
+  color: #fff;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  backdrop-filter: blur(5px);
+}
+
+.play-gallery__source:hover {
+  background: rgba(24, 22, 18, 0.86);
+}
+
 .play-gallery__copy {
   padding: 12px 4px;
   display: grid;

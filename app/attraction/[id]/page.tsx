@@ -102,12 +102,23 @@ export default async function AttractionPage({
                   <article key={activity}>
                     <div className="play-gallery__image">
                       <Image
-                        src={assetPath(playImages[index])}
+                        src={assetPath(playImages[index].image)}
                         alt={`${attraction.name}：${activity}`}
                         fill
                         sizes="(max-width: 800px) 100vw, 35vw"
                       />
-                      <span>现场玩法 · {String(index + 1).padStart(2, "0")}</span>
+                      <span>玩法图解 · {String(index + 1).padStart(2, "0")}</span>
+                      {playImages[index].source && (
+                        <a
+                          className="play-gallery__source"
+                          href={playImages[index].source}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`查看“${activity}”配图来源`}
+                        >
+                          图片来源 ↗
+                        </a>
+                      )}
                     </div>
                     <div className="play-gallery__copy">
                       <span>{String(index + 1).padStart(2, "0")}</span>
