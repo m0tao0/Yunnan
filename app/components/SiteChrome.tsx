@@ -21,8 +21,7 @@ export function Header({ compact = false }: { compact?: boolean }) {
       </Link>
       <nav aria-label="主导航">
         <Link href="/#journey">逐日行程</Link>
-        <Link href="/#places">目的地</Link>
-        <Link href="/#budget">预算</Link>
+        <Link href="/notes#budget">预算</Link>
         <Link href="/notes">行前须知</Link>
       </nav>
     </header>
@@ -46,4 +45,3 @@ export function Footer() {
     </footer>
   );
 }
-

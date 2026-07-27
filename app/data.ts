@@ -511,3 +511,42 @@ export const costRows = [
   ["餐饮", "¥2,680", "¥3,660", "一家三口九天"],
   ["合计", "¥24,080", "¥35,860", "舒适建议准备 ¥28,000—32,000"],
 ];
+
+export const stationSequence = days.flatMap((day) =>
+  day.schedule.map((item, index) => ({ day, item, index })),
+);
+
+export function stationHref(
+  dayNumber: number,
+  index: number,
+  item: ScheduleItem,
+) {
+  return item.attractionId
+    ? `/attraction/${item.attractionId}`
+    : `/stop/${dayNumber}/${index}`;
+}
+
+export function activityImagesFor(attraction: Attraction) {
+  const pools: Record<City, string[]> = {
+    大理: [
+      "/images/dali-erhai.jpg",
+      "/images/dali-old-town.jpg",
+      "/images/dali-erhai.jpg",
+    ],
+    丽江: [
+      "/images/lijiang-old-town.jpg",
+      "/images/jade-dragon.jpg",
+      "/images/black-dragon-pool.jpg",
+      "/images/snow-summit.jpg",
+    ],
+  };
+
+  const candidates = [
+    attraction.image,
+    ...pools[attraction.city].filter((image) => image !== attraction.image),
+  ];
+
+  return attraction.activities.map(
+    (_, index) => candidates[index % candidates.length],
+  );
+}

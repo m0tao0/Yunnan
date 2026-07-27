@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { BookSpine, Footer, Header } from "../components/SiteChrome";
-import { assetPath, packingGroups } from "../data";
+import { assetPath, costRows, packingGroups } from "../data";
 
 const bookingSteps = [
   ["出票后", "锁定上海—大理、丽江—上海航班，以及大理—丽江动车候选班次。"],
@@ -103,6 +103,36 @@ export default function NotesPage() {
                   <b>{row[0]}</b><span>{row[1]}</span><p>{row[2]}</p>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section className="budget notes-budget" id="budget">
+            <div className="section-heading">
+              <div>
+                <span className="eyebrow">FAMILY BUDGET</span>
+                <h2>一家三口预算账本</h2>
+              </div>
+              <p>按2位成人 + 1位5岁儿童估算；机票和酒店价格是波动最大的部分。</p>
+            </div>
+            <div className="budget__grid">
+              <div className="budget-table">
+                <div className="budget-row budget-row--head">
+                  <span>类别</span><span>低位</span><span>高位</span><span>说明</span>
+                </div>
+                {costRows.map((row) => (
+                  <div className="budget-row" key={row[0]}>
+                    <b>{row[0]}</b><span>{row[1]}</span><span>{row[2]}</span><small>{row[3]}</small>
+                  </div>
+                ))}
+              </div>
+              <aside className="budget-ticket">
+                <span>RECOMMENDED</span>
+                <p>舒适准备</p>
+                <strong>¥28,000</strong>
+                <em>—</em>
+                <strong>¥32,000</strong>
+                <small>另留 ¥1,000—2,000 购买茶叶、鲜花饼、东巴纸品与儿童纪念品。</small>
+              </aside>
             </div>
           </section>
 

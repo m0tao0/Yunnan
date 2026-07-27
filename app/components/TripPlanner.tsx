@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { assetPath, attractions, costRows, days, tripMeta, type City } from "../data";
+import { assetPath, days, stationHref, type City } from "../data";
 
 type Filter = "全部" | City;
 
@@ -15,7 +15,7 @@ const paceLabels = {
 
 export function TripPlanner() {
   const [filter, setFilter] = useState<Filter>("全部");
-  const [openDay, setOpenDay] = useState<number>(1);
+  const [openDay, setOpenDay] = useState<number>(0);
   const [done, setDone] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -56,24 +56,6 @@ export function TripPlanner() {
             给一个喜欢攀爬、跑动和动手的5岁男孩：把最重要的户外项目留给清晨，
             在大理守住午睡，在丽江用车上午睡和短休换来更丰富的下午。
           </p>
-          <div className="hero__meta">
-            <div>
-              <span>日期</span>
-              <b>{tripMeta.dates}</b>
-            </div>
-            <div>
-              <span>路线</span>
-              <b>{tripMeta.route}</b>
-            </div>
-            <div>
-              <span>舒适预算</span>
-              <b>{tripMeta.budget}</b>
-            </div>
-          </div>
-          <a className="paper-button" href="#journey">
-            打开旅行手账
-            <span aria-hidden="true">↓</span>
-          </a>
         </div>
         <div className="hero__visual">
           <figure className="hero__photo hero__photo--main">
@@ -101,36 +83,6 @@ export function TripPlanner() {
             <b>9</b>
             <span>DAYS</span>
           </div>
-        </div>
-      </section>
-
-      <section className="route-strip" aria-label="九天路线概览">
-        {days.map((day) => (
-          <button
-            key={day.day}
-            type="button"
-            onClick={() => {
-              setFilter("全部");
-              setOpenDay(day.day);
-              document.getElementById("journey")?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            <span>D{day.day}</span>
-            <b>{day.date}</b>
-            <small>{day.city}</small>
-          </button>
-        ))}
-      </section>
-
-      <section className="editorial-intro">
-        <div>
-          <span className="eyebrow">TRAVEL PHILOSOPHY</span>
-          <h2>不是把景点塞满，而是让孩子真的走进去。</h2>
-        </div>
-        <div className="editorial-intro__rules">
-          <p><b>01</b> 云上草原和路极都放在精神最好的上午。</p>
-          <p><b>02</b> 大理每天守住午睡；丽江允许车睡与短休。</p>
-          <p><b>03</b> 以预约网约车为主，官方接驳进入雪山与龙女湖。</p>
         </div>
       </section>
 
@@ -165,7 +117,11 @@ export function TripPlanner() {
           {filteredDays.map((day) => {
             const isOpen = openDay === day.day;
             return (
-              <article className={`day-card ${isOpen ? "is-open" : ""}`} key={day.day}>
+              <article
+                className={`day-card ${isOpen ? "is-open" : ""}`}
+                id={`day-${day.day}`}
+                key={day.day}
+              >
                 <button
                   type="button"
                   className="day-card__summary"
@@ -213,17 +169,16 @@ export function TripPlanner() {
                               {done[key] ? "✓" : ""}
                             </button>
                             <time>{item.time}</time>
-                            <div>
+                            <Link
+                              className="timeline__link"
+                              href={stationHref(day.day, index, item)}
+                            >
                               <h4>{item.place}</h4>
                               {item.transport && <span className="transport">↗ {item.transport}</span>}
                               <p>{item.activity}</p>
                               {item.note && <small>{item.note}</small>}
-                              {item.attractionId && (
-                                <Link href={`/attraction/${item.attractionId}`}>
-                                  查看地点详情与安全提示 →
-                                </Link>
-                              )}
-                            </div>
+                              <b className="station-detail-cta">打开站点详情 →</b>
+                            </Link>
                           </div>
                         );
                       })}
@@ -239,90 +194,6 @@ export function TripPlanner() {
             );
           })}
         </div>
-      </section>
-
-      <section className="places" id="places">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">PLACES & PLAY</span>
-            <h2>孩子会真正参与的地方</h2>
-          </div>
-          <p>去掉以旅拍为主、同质化或强度不合适的项目，保留跑、爬、骑、观察与手作。</p>
-        </div>
-        <div className="place-grid">
-          {attractions.slice(0, 8).map((place, index) => (
-            <Link className={`place-card place-card--${index % 3}`} href={`/attraction/${place.id}`} key={place.id}>
-              <div className="place-card__image">
-                <Image src={assetPath(place.image)} alt={place.name} fill sizes="(max-width: 800px) 90vw, 30vw" />
-              </div>
-              <div className="place-card__copy">
-                <span>{place.city} · {place.duration}</span>
-                <h3>{place.name}</h3>
-                <p>{place.kicker}</p>
-                <b>查看详情 ↗</b>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="hotel-ledger">
-        <div className="hotel-ledger__title">
-          <span className="eyebrow">TWO BASES, NO RUSH</span>
-          <h2>只住两家酒店，不反复搬行李</h2>
-        </div>
-        {tripMeta.hotels.map((hotel, index) => (
-          <article key={hotel.name}>
-            <span>0{index + 1}</span>
-            <div>
-              <small>{hotel.city} · {hotel.nights}</small>
-              <h3>{hotel.name}</h3>
-              <p>{hotel.note}</p>
-            </div>
-          </article>
-        ))}
-      </section>
-
-      <section className="budget" id="budget">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">FAMILY BUDGET</span>
-            <h2>一家三口预算账本</h2>
-          </div>
-          <p>按2位成人 + 1位5岁儿童估算；机票和酒店价格是波动最大的部分。</p>
-        </div>
-        <div className="budget__grid">
-          <div className="budget-table">
-            <div className="budget-row budget-row--head">
-              <span>类别</span><span>低位</span><span>高位</span><span>说明</span>
-            </div>
-            {costRows.map((row) => (
-              <div className="budget-row" key={row[0]}>
-                <b>{row[0]}</b><span>{row[1]}</span><span>{row[2]}</span><small>{row[3]}</small>
-              </div>
-            ))}
-          </div>
-          <aside className="budget-ticket">
-            <span>RECOMMENDED</span>
-            <p>舒适准备</p>
-            <strong>¥28,000</strong>
-            <em>—</em>
-            <strong>¥32,000</strong>
-            <small>另留 ¥1,000—2,000 购买茶叶、鲜花饼、东巴纸品与儿童纪念品。</small>
-          </aside>
-        </div>
-      </section>
-
-      <section className="notes-cta">
-        <div>
-          <span className="eyebrow">BEFORE YOU GO</span>
-          <h2>九月仍在雨季尾声，行李要会“分层”。</h2>
-          <p>查看穿衣、雨具、雪山随身包、预约顺序和恶劣天气替代方案。</p>
-        </div>
-        <Link className="paper-button paper-button--light" href="/notes">
-          打开行前须知
-          <span aria-hidden="true">↗</span>
-        </Link>
       </section>
     </>
   );

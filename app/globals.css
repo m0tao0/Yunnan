@@ -1599,8 +1599,7 @@ img {
     gap: 15px;
   }
 
-  .site-header nav a:nth-child(2),
-  .site-header nav a:nth-child(3) {
+  .site-header nav a:nth-child(2) {
     display: none;
   }
 
@@ -1819,5 +1818,418 @@ img {
 
   .final-check div {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Refined itinerary-only home */
+.journey {
+  border-top: 1px solid var(--line);
+}
+
+.hero__photo--main {
+  inset: 12px 12% 42px 0;
+}
+
+.hero__photo--inset {
+  width: 52%;
+  height: 58%;
+  right: -1%;
+  bottom: -8px;
+  border-width: 11px;
+}
+
+.hero__stamp {
+  top: auto;
+  right: 47%;
+  bottom: -25px;
+  width: 74px;
+  height: 74px;
+  transform: rotate(-7deg);
+  box-shadow: 0 7px 18px rgba(48, 39, 28, .18);
+}
+
+.hero__stamp b {
+  font-size: 25px;
+}
+
+.timeline__item .timeline__link {
+  display: block;
+  margin: -7px -8px 0;
+  padding: 7px 8px 10px;
+  color: inherit;
+  border: 0;
+  transition: background .2s ease;
+}
+
+.timeline__item .timeline__link:hover {
+  background: var(--jade-light);
+}
+
+.timeline__item .timeline__link:hover h4 {
+  color: var(--jade);
+}
+
+.station-detail-cta {
+  display: inline-block;
+  margin-top: 9px;
+  color: var(--jade);
+  font-size: 9px;
+  letter-spacing: .07em;
+  border-bottom: 1px solid var(--jade);
+}
+
+/* Istanbul-inspired station details */
+.detail-hero--istanbul {
+  min-height: 720px;
+  grid-template-columns: 1.08fr .92fr;
+  gap: 0;
+  background: var(--paper-light);
+}
+
+.detail-hero--istanbul .detail-hero__image {
+  min-height: 650px;
+  margin: 35px 0 35px 5.8vw;
+  border: 10px solid var(--paper);
+  border-bottom-width: 36px;
+  box-shadow: 0 18px 42px rgba(48, 39, 28, .16);
+}
+
+.detail-hero--istanbul .detail-hero__copy {
+  padding: 54px 5.8vw 45px;
+}
+
+.detail-hero--istanbul .back-link {
+  margin-bottom: 38px;
+}
+
+.detail-district {
+  margin: 12px 0 0 !important;
+  color: var(--clay) !important;
+  font-family: var(--sans) !important;
+  font-size: 9px !important;
+  font-weight: 700;
+  letter-spacing: .17em;
+}
+
+.detail-hero__copy > .detail-intro {
+  margin: 0;
+  color: #554f48;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.detail-quick-facts {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--line);
+}
+
+.detail-quick-facts article {
+  min-height: 88px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 27px 1fr;
+  gap: 8px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-quick-facts article > span {
+  color: var(--clay);
+  font-family: var(--serif);
+  font-size: 16px;
+}
+
+.detail-quick-facts small,
+.detail-quick-facts b {
+  display: block;
+}
+
+.detail-quick-facts small {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: .11em;
+}
+
+.detail-quick-facts b {
+  font-family: var(--serif);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.detail-route-card {
+  margin-top: 18px;
+  padding: 18px 20px;
+  background: var(--paper-deep);
+  border-left: 4px solid var(--blue);
+}
+
+.detail-route-card span,
+.detail-route-card strong {
+  display: block;
+}
+
+.detail-route-card span {
+  color: var(--blue);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.detail-route-card strong {
+  margin: 8px 0 5px;
+  font-family: var(--serif);
+  font-size: 13px;
+}
+
+.detail-route-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.detail-body--guide {
+  padding: 92px 8vw;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(265px, .55fr);
+  gap: 6vw;
+  background: var(--paper-light);
+}
+
+.content-block-heading {
+  margin-bottom: 34px;
+}
+
+.content-block-heading > p {
+  max-width: 610px;
+  color: var(--muted);
+  font-family: var(--serif);
+  line-height: 1.8;
+}
+
+.play-gallery {
+  border-top: 1px solid var(--ink);
+}
+
+.play-gallery article {
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.play-gallery article:nth-child(even) .play-gallery__image {
+  order: 2;
+}
+
+.play-gallery__image {
+  position: relative;
+  min-height: 310px;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+
+.play-gallery__image > span {
+  position: absolute;
+  left: 13px;
+  bottom: 13px;
+  padding: 7px 9px;
+  color: white;
+  background: rgba(39, 37, 34, .72);
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+.play-gallery__copy {
+  padding: 12px 4px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-content: center;
+  gap: 13px;
+}
+
+.play-gallery__copy > span {
+  color: var(--clay);
+  font-family: var(--serif);
+  font-size: 27px;
+}
+
+.play-gallery__copy h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.play-gallery__copy p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.play-gallery--single article {
+  grid-template-columns: 1.2fr .8fr;
+}
+
+.detail-aside {
+  position: sticky;
+  top: 28px;
+  align-self: start;
+}
+
+.aside-card {
+  padding: 30px;
+  background: var(--paper-deep);
+}
+
+.detail-aside .safety-panel {
+  padding: 30px;
+}
+
+.detail-aside .safety-panel h2 {
+  font-size: 30px;
+}
+
+.detail-aside .rain-note {
+  margin-top: 18px;
+  padding: 22px;
+  border-left: 4px solid var(--blue);
+}
+
+.detail-data-note {
+  margin: 18px 4px 0;
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1.7;
+}
+
+.next-stop {
+  padding: 78px 9vw 86px;
+  background: var(--paper-deep);
+  border-top: 1px solid var(--ink);
+}
+
+.next-stop h2 {
+  margin: 15px 0 32px;
+  color: var(--clay);
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: 1.25;
+}
+
+.next-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.next-back {
+  color: var(--jade);
+  font-family: var(--serif);
+  font-size: 12px;
+  border-bottom: 1px solid var(--jade);
+}
+
+.notes-budget {
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+}
+
+@media (max-width: 980px) {
+  .detail-hero--istanbul {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-hero--istanbul .detail-hero__image {
+    min-height: 560px;
+    margin: 32px 5vw 0;
+  }
+
+  .detail-hero--istanbul .detail-hero__copy {
+    padding-top: 45px;
+  }
+
+  .detail-body--guide {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-aside {
+    position: static;
+  }
+}
+
+@media (max-width: 800px) {
+  .hero {
+    padding-bottom: 88px;
+  }
+
+  .hero__photo--main {
+    right: 13%;
+    bottom: 35px;
+  }
+
+  .hero__photo--inset {
+    width: 59%;
+    height: 52%;
+    right: -2%;
+    bottom: -12px;
+  }
+
+  .hero__stamp {
+    right: auto;
+    left: 3%;
+    bottom: -25px;
+  }
+
+  .detail-hero--istanbul .detail-hero__image {
+    min-height: 430px;
+    margin: 22px 17px 0;
+  }
+
+  .detail-hero--istanbul .detail-hero__copy {
+    padding: 42px 22px 50px;
+  }
+
+  .detail-quick-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-body--guide {
+    padding: 65px 22px;
+  }
+
+  .play-gallery article,
+  .play-gallery--single article {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .play-gallery article:nth-child(even) .play-gallery__image {
+    order: 0;
+  }
+
+  .play-gallery__image {
+    min-height: 250px;
+  }
+
+  .play-gallery__copy {
+    grid-template-columns: 38px 1fr;
+  }
+
+  .next-stop {
+    padding: 62px 22px 70px;
+  }
+
+  .next-actions {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
